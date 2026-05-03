@@ -1,28 +1,28 @@
 const STORAGE_KEY = "cute-baby-card-data-v1";
 
 const defaultData = {
-  title: "关于宝宝",
-  nickname: "宝宝",
-  birthday: "2004.9.21",
-  height: "164cm",
-  shoeSize: "36/37",
-  zodiac: "白羊座",
-  cycle: "月初",
-  essentialItem: "防晒霜 MOTASY",
-  favoriteMeals: "鸭脖、鸡爪",
-  favoriteDishes: "螺蛳粉、冒菜、花甲米线、麻辣香锅",
-  favoriteFruits: "蓝莓、菠萝、西瓜",
-  favoriteDrinks: "一切果茶",
-  dislikedFoods: "奶酪棒、鱼皮、花生饼干、很甜的东西",
-  dislikedVegetables: "肠粉、生姜、香菜",
-  allergies: "粉尘过敏",
-  fear: "怕黑",
-  clothingStyle: "宽松的衣服",
-  likes: "周杰伦和薛之谦",
-  promise: "下次见面要给宝宝带束花",
-  metDate: "2024.1.22",
-  togetherDate: "2025.10.22",
-  closing: "不能凶她，要一直一直陪着她。"
+  title: "",
+  nickname: "",
+  birthday: "",
+  height: "",
+  shoeSize: "",
+  zodiac: "",
+  cycle: "",
+  essentialItem: "",
+  favoriteMeals: "",
+  favoriteDishes: "",
+  favoriteFruits: "",
+  favoriteDrinks: "",
+  dislikedFoods: "",
+  dislikedVegetables: "",
+  allergies: "",
+  fear: "",
+  clothingStyle: "",
+  likes: "",
+  promise: "",
+  metDate: "",
+  togetherDate: "",
+  closing: ""
 };
 
 const fieldConfigs = [
@@ -467,14 +467,14 @@ async function saveAsImage() {
 function resetForm() {
   fillForm(defaultData);
   syncForm();
-  setStatus("已恢复为默认内容。");
+  setStatus("已清空内容。");
 }
 
 function init() {
   const initialData = loadSavedData();
   fillForm(initialData);
   renderCard(initialData);
-  setStatus("已准备好开始填写，分享时默认只分享基础页面。");
+  setStatus("已准备好开始填写，打开页面默认是空白内容。");
 
   form.addEventListener("input", syncForm);
   copyLinkBtn.addEventListener("click", copyShareUrl);
