@@ -362,10 +362,10 @@ function drawPanelPattern(ctx, x, y, width, height) {
   ctx.clip();
 
   const decorations = [
-    { type: "kitty", x: 0.12, y: 0.16, scale: 0.74, alpha: 0.12 },
-    { type: "bow", x: 0.84, y: 0.23, scale: 0.9, alpha: 0.15 },
-    { type: "paw", x: 0.78, y: 0.78, scale: 0.78, alpha: 0.34 },
-    { type: "bow", x: 0.22, y: 0.62, scale: 0.72, alpha: 0.1 }
+    { type: "kitty", x: 0.13, y: 0.17, scale: 0.68, alpha: 0.08 },
+    { type: "bow", x: 0.82, y: 0.24, scale: 0.74, alpha: 0.1 },
+    { type: "paw", x: 0.75, y: 0.77, scale: 0.64, alpha: 0.22 },
+    { type: "bow", x: 0.24, y: 0.64, scale: 0.58, alpha: 0.07 }
   ];
 
   decorations.forEach((item) => {
