@@ -53,7 +53,6 @@ const previewTitle = document.getElementById("previewTitle");
 const previewContent = document.getElementById("previewContent");
 const statusText = document.getElementById("statusText");
 const copyLinkBtn = document.getElementById("copyLinkBtn");
-const shareBtn = document.getElementById("shareBtn");
 const resetBtn = document.getElementById("resetBtn");
 const saveImageBtn = document.getElementById("saveImageBtn");
 const exportCanvas = document.getElementById("exportCanvas");
@@ -176,31 +175,6 @@ async function copyShareUrl() {
     console.warn("复制失败:", error);
     setStatus(`复制失败，请手动复制这个链接：${shareUrl}`);
   }
-}
-
-async function shareProfile() {
-  const shareUrl = buildBasePageUrl();
-  const shareData = {
-    title: "关于宝宝资料卡",
-    text: "这是一个可爱的资料卡基础页面，点开就能自己填写。",
-    url: shareUrl
-  };
-
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-      setStatus("已打开系统分享面板。");
-      return;
-    } catch (error) {
-      if (error && error.name === "AbortError") {
-        setStatus("你取消了分享。");
-        return;
-      }
-      console.warn("系统分享失败:", error);
-    }
-  }
-
-  await copyShareUrl();
 }
 
 function getWrappedLines(ctx, text, maxWidth) {
@@ -504,7 +478,6 @@ function init() {
 
   form.addEventListener("input", syncForm);
   copyLinkBtn.addEventListener("click", copyShareUrl);
-  shareBtn.addEventListener("click", shareProfile);
   resetBtn.addEventListener("click", resetForm);
   saveImageBtn.addEventListener("click", saveAsImage);
   closeImageSheetBtn.addEventListener("click", closeImageSheet);
