@@ -291,6 +291,99 @@ function drawBow(ctx, centerX, centerY) {
   ctx.restore();
 }
 
+function drawPaw(ctx, centerX, centerY, scale = 1, alpha = 0.85) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = "#ffd4e4";
+
+  const circles = [
+    [0, 0, 12],
+    [-18, -14, 7],
+    [-2, -22, 6],
+    [14, -16, 6]
+  ];
+
+  circles.forEach(([x, y, radius]) => {
+    ctx.beginPath();
+    ctx.arc(centerX + x * scale, centerY + y * scale, radius * scale, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  ctx.restore();
+}
+
+function drawKittyFace(ctx, centerX, centerY, scale = 1, alpha = 0.22) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+
+  ctx.fillStyle = "#fff9fb";
+  ctx.strokeStyle = "#ffb6d2";
+  ctx.lineWidth = 3 * scale;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+
+  ctx.beginPath();
+  ctx.roundRect(centerX - 30 * scale, centerY - 26 * scale, 60 * scale, 62 * scale, 20 * scale);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(centerX - 18 * scale, centerY - 18 * scale);
+  ctx.lineTo(centerX - 27 * scale, centerY - 34 * scale);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(centerX + 18 * scale, centerY - 18 * scale);
+  ctx.lineTo(centerX + 27 * scale, centerY - 34 * scale);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(centerX - 18 * scale, centerY + 2 * scale);
+  ctx.lineTo(centerX - 7 * scale, centerY + 2 * scale);
+  ctx.moveTo(centerX + 7 * scale, centerY + 2 * scale);
+  ctx.lineTo(centerX + 18 * scale, centerY + 2 * scale);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY + 2 * scale);
+  ctx.lineTo(centerX - 3 * scale, centerY + 7 * scale);
+  ctx.lineTo(centerX + 3 * scale, centerY + 7 * scale);
+  ctx.closePath();
+  ctx.fillStyle = "#ff95bf";
+  ctx.fill();
+
+  drawBow(ctx, centerX + 35 * scale, centerY - 22 * scale);
+  ctx.restore();
+}
+
+function drawPanelPattern(ctx, x, y, width, height) {
+  ctx.save();
+  drawRoundedRect(ctx, x, y, width, height, 28);
+  ctx.clip();
+
+  const columns = Math.ceil(width / 220);
+  const rows = Math.ceil(height / 220);
+
+  for (let row = 0; row < rows; row += 1) {
+    for (let col = 0; col < columns; col += 1) {
+      const baseX = x + 55 + col * 220;
+      const baseY = y + 56 + row * 220;
+
+      drawKittyFace(ctx, baseX, baseY, 0.72, 0.14);
+      drawBow(ctx, baseX + 105, baseY + 18);
+      drawPaw(ctx, baseX + 130, baseY + 120, 0.8, 0.42);
+
+      ctx.save();
+      ctx.globalAlpha = 0.12;
+      ctx.scale(0.72, 0.72);
+      drawBow(ctx, (baseX - 18) / 0.72, (baseY + 118) / 0.72);
+      ctx.restore();
+    }
+  }
+
+  ctx.restore();
+}
+
 function renderCanvas(data) {
   exportCanvas.width = 1080;
   exportCanvas.height = 1680;
@@ -345,6 +438,8 @@ function renderCanvas(data) {
   ctx.strokeStyle = "rgba(255, 192, 219, 0.72)";
   ctx.lineWidth = 4;
   ctx.stroke();
+
+  drawPanelPattern(ctx, 100, 110, width - 200, height - 220);
 
   drawRoundedRect(ctx, 120, 120, 280, 64, 32);
   const pill = ctx.createLinearGradient(120, 120, 400, 184);
