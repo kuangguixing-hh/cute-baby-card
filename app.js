@@ -361,25 +361,33 @@ function drawPanelPattern(ctx, x, y, width, height) {
   drawRoundedRect(ctx, x, y, width, height, 28);
   ctx.clip();
 
-  const columns = Math.ceil(width / 220);
-  const rows = Math.ceil(height / 220);
+  const decorations = [
+    { type: "kitty", x: 0.12, y: 0.16, scale: 0.74, alpha: 0.12 },
+    { type: "bow", x: 0.84, y: 0.23, scale: 0.9, alpha: 0.15 },
+    { type: "paw", x: 0.78, y: 0.78, scale: 0.78, alpha: 0.34 },
+    { type: "bow", x: 0.22, y: 0.62, scale: 0.72, alpha: 0.1 }
+  ];
 
-  for (let row = 0; row < rows; row += 1) {
-    for (let col = 0; col < columns; col += 1) {
-      const baseX = x + 55 + col * 220;
-      const baseY = y + 56 + row * 220;
+  decorations.forEach((item) => {
+    const px = x + width * item.x;
+    const py = y + height * item.y;
 
-      drawKittyFace(ctx, baseX, baseY, 0.72, 0.14);
-      drawBow(ctx, baseX + 105, baseY + 18);
-      drawPaw(ctx, baseX + 130, baseY + 120, 0.8, 0.42);
-
-      ctx.save();
-      ctx.globalAlpha = 0.12;
-      ctx.scale(0.72, 0.72);
-      drawBow(ctx, (baseX - 18) / 0.72, (baseY + 118) / 0.72);
-      ctx.restore();
+    if (item.type === "kitty") {
+      drawKittyFace(ctx, px, py, item.scale, item.alpha);
+      return;
     }
-  }
+
+    if (item.type === "paw") {
+      drawPaw(ctx, px, py, item.scale, item.alpha);
+      return;
+    }
+
+    ctx.save();
+    ctx.globalAlpha = item.alpha;
+    ctx.scale(item.scale, item.scale);
+    drawBow(ctx, px / item.scale, py / item.scale);
+    ctx.restore();
+  });
 
   ctx.restore();
 }
