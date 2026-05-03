@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>关于宝宝资料卡</title>
+  <meta name="description" content="可爱风格的宝宝资料卡，支持手机填写、隐私保存、分享基础页面、导出成图片。">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero__badge">Cute Profile Card</div>
+      <h1>关于宝宝资料卡</h1>
+      <p>手机上就能填写，内容只保存在自己设备里，对外只分享空白基础页面。</p>
+    </header>
+
+    <main class="layout">
+      <section class="panel form-panel">
+        <div class="panel__title">
+          <h2>填写信息</h2>
+          <p>内容会自动保存在当前手机或电脑浏览器里，不会跟着分享链接发出去。</p>
+        </div>
+
+        <form id="profileForm" class="form-grid">
+          <label>
+            <span>资料卡标题</span>
+            <input name="title" type="text" placeholder="例如：关于宝宝" maxlength="20">
+          </label>
+          <label>
+            <span>称呼</span>
+            <input name="nickname" type="text" placeholder="例如：宝宝 / 小可爱" maxlength="20">
+          </label>
+          <label>
+            <span>生日</span>
+            <input name="birthday" type="text" placeholder="例如：2004.9.21">
+          </label>
+          <label>
+            <span>身高</span>
+            <input name="height" type="text" placeholder="例如：164cm">
+          </label>
+          <label>
+            <span>鞋码</span>
+            <input name="shoeSize" type="text" placeholder="例如：36/37">
+          </label>
+          <label>
+            <span>星座</span>
+            <input name="zodiac" type="text" placeholder="例如：白羊座">
+          </label>
+          <label>
+            <span>经期</span>
+            <input name="cycle" type="text" placeholder="例如：月初">
+          </label>
+          <label>
+            <span>常用物品</span>
+            <input name="essentialItem" type="text" placeholder="例如：防晒霜 MOTASY">
+          </label>
+          <label class="full">
+            <span>爱吃的零食 / 餐食</span>
+            <textarea name="favoriteMeals" rows="2" placeholder="例如：鸭脖、鸡爪、粉、冒菜"></textarea>
+          </label>
+          <label class="full">
+            <span>爱吃的菜</span>
+            <textarea name="favoriteDishes" rows="2" placeholder="例如：螺蛳粉、冒菜、花甲米线、麻辣香锅"></textarea>
+          </label>
+          <label>
+            <span>爱吃的水果</span>
+            <input name="favoriteFruits" type="text" placeholder="例如：蓝莓、菠萝、西瓜">
+          </label>
+          <label>
+            <span>爱喝的</span>
+            <input name="favoriteDrinks" type="text" placeholder="例如：一切果茶">
+          </label>
+          <label class="full">
+            <span>不爱吃的食物</span>
+            <textarea name="dislikedFoods" rows="2" placeholder="例如：奶酪棒、鱼皮、花生饼干、某些很甜的东西"></textarea>
+          </label>
+          <label>
+            <span>不爱吃的菜</span>
+            <input name="dislikedVegetables" type="text" placeholder="例如：肠粉、生姜、香菜">
+          </label>
+          <label>
+            <span>过敏情况</span>
+            <input name="allergies" type="text" placeholder="例如：粉尘过敏">
+          </label>
+          <label>
+            <span>有点怕什么</span>
+            <input name="fear" type="text" placeholder="例如：怕黑">
+          </label>
+          <label>
+            <span>喜欢穿什么</span>
+            <input name="clothingStyle" type="text" placeholder="例如：宽松衣服">
+          </label>
+          <label>
+            <span>喜欢什么</span>
+            <input name="likes" type="text" placeholder="例如：周杰伦、薛之谦">
+          </label>
+          <label class="full">
+            <span>想对她说 / 承诺</span>
+            <textarea name="promise" rows="2" placeholder="例如：下次见面要给宝宝带束花"></textarea>
+          </label>
+          <label>
+            <span>认识日期</span>
+            <input name="metDate" type="text" placeholder="例如：2024.1.22">
+          </label>
+          <label>
+            <span>在一起日期</span>
+            <input name="togetherDate" type="text" placeholder="例如：2025.10.22">
+          </label>
+          <label class="full">
+            <span>最后想说的话</span>
+            <textarea name="closing" rows="3" placeholder="例如：我要和宝宝一直一直在一起"></textarea>
+          </label>
+        </form>
+
+        <div class="action-row">
+          <button id="resetBtn" type="button" class="ghost-button">恢复默认</button>
+          <button id="copyLinkBtn" type="button" class="soft-button">复制基础页链接</button>
+          <button id="shareBtn" type="button" class="soft-button">分享基础页面</button>
+          <button id="saveImageBtn" type="button" class="primary-button">保存成图片</button>
+        </div>
+
+        <p id="statusText" class="status-text" aria-live="polite"></p>
+      </section>
+
+      <section class="panel preview-panel">
+        <div class="panel__title">
+          <h2>图片预览</h2>
+          <p>下面这张卡会按照你填写的内容实时更新。</p>
+        </div>
+
+        <div class="preview-wrap">
+          <article id="cardPreview" class="cute-card">
+            <div class="cute-card__top">
+              <div class="cute-card__stamp">Sweet Notes</div>
+              <svg class="cute-card__bow" viewBox="0 0 72 44" aria-hidden="true">
+                <path d="M31 22C18 8 10 9 8 18C6 27 16 31 31 24Z" fill="#ff95bf" stroke="#fff4f8" stroke-width="2.6" stroke-linejoin="round"></path>
+                <path d="M41 22C54 8 62 9 64 18C66 27 56 31 41 24Z" fill="#ff95bf" stroke="#fff4f8" stroke-width="2.6" stroke-linejoin="round"></path>
+                <ellipse cx="36" cy="22" rx="8" ry="7" fill="#ff5f9b"></ellipse>
+                <path d="M33 16L36 28L39 16" fill="none" stroke="#ffdbe8" stroke-width="2.2" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <h3 id="previewTitle">关于宝宝</h3>
+            <div id="previewContent" class="cute-card__content"></div>
+            <div class="cute-card__footer">愿每一条小习惯都被温柔记住</div>
+          </article>
+        </div>
+
+        <canvas id="exportCanvas" width="1080" height="1680" hidden></canvas>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
