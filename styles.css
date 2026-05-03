@@ -159,6 +159,35 @@ body::after {
   padding: 20px;
 }
 
+.panel > * {
+  position: relative;
+  z-index: 2;
+}
+
+.form-panel::before,
+.preview-panel::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 22px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.form-panel::before {
+  opacity: 0.22;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg transform='translate(16 18)' opacity='.95'%3E%3Cpath d='M34 44c0-18 13-31 30-31s30 13 30 31v9c0 16-13 29-30 29S34 69 34 53z' fill='%23fff8fb' stroke='%23ffb4d0' stroke-width='3'/%3E%3Cpath d='M45 20L36 6M83 20l9-14M46 47h11m14 0h11M64 47l-4 6h8z' stroke='%23ff90be' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cellipse cx='88' cy='16' rx='12' ry='9' fill='%23ffb1cf'/%3E%3Cellipse cx='107' cy='16' rx='12' ry='9' fill='%23ffb1cf'/%3E%3Ccircle cx='97' cy='16' r='6' fill='%23ff6ea7'/%3E%3Cpath d='M94 10l3 11 3-11' stroke='%23fff4f8' stroke-width='2.5' stroke-linecap='round'/%3E%3C/g%3E%3Cg transform='translate(132 110)' opacity='.8'%3E%3Cellipse cx='18' cy='18' rx='16' ry='12' fill='%23ffc0da'/%3E%3Cellipse cx='50' cy='18' rx='16' ry='12' fill='%23ffc0da'/%3E%3Ccircle cx='34' cy='18' r='8' fill='%23ff79a9'/%3E%3Cpath d='M30 12l4 12 4-12' stroke='%23fff5f8' stroke-width='2.6' stroke-linecap='round'/%3E%3C/g%3E%3Cg transform='translate(122 154)' opacity='.78' fill='%23ffd4e4'%3E%3Ccircle cx='16' cy='12' r='8'/%3E%3Ccircle cx='34' cy='6' r='6'/%3E%3Ccircle cx='49' cy='13' r='6'/%3E%3Ccircle cx='24' cy='26' r='12'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  background-size: 240px 240px;
+}
+
+.preview-panel::before {
+  opacity: 0.2;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg transform='translate(18 20)' opacity='.9'%3E%3Cellipse cx='26' cy='20' rx='14' ry='10' fill='%23ffbdd5'/%3E%3Cellipse cx='52' cy='20' rx='14' ry='10' fill='%23ffbdd5'/%3E%3Ccircle cx='39' cy='20' r='7' fill='%23ff6ea7'/%3E%3Cpath d='M36 15l3 10 3-10' stroke='%23fff5f8' stroke-width='2.4' stroke-linecap='round'/%3E%3C/g%3E%3Cg transform='translate(102 34)' opacity='.9'%3E%3Cpath d='M18 26c0-14 10-24 24-24s24 10 24 24v7c0 13-10 23-24 23S18 46 18 33z' fill='%23fff9fb' stroke='%23ffb6d2' stroke-width='2.8'/%3E%3Cpath d='M28 8L21-3M56 8l7-11M29 29h9m11 0h9M42 29l-3 4h6z' stroke='%23ff94c0' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cg transform='translate(118 130)' opacity='.8' fill='%23ffd5e6'%3E%3Ccircle cx='12' cy='10' r='6'/%3E%3Ccircle cx='26' cy='5' r='5'/%3E%3Ccircle cx='39' cy='10' r='5'/%3E%3Ccircle cx='19' cy='21' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  background-size: 220px 220px;
+}
+
 .panel::after {
   content: "";
   position: absolute;
@@ -503,6 +532,12 @@ body::after {
   .panel {
     border-radius: 22px;
     padding: 16px;
+  }
+
+  .form-panel::before,
+  .preview-panel::before {
+    inset: 12px;
+    border-radius: 18px;
   }
 
   .form-grid {
