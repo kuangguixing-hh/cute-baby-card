@@ -121,6 +121,7 @@
         </div>
 
         <p id="statusText" class="status-text" aria-live="polite"></p>
+        <p class="helper-text">手机或微信里如果不能直接下载，会自动弹出图片预览，可长按保存到相册。</p>
       </section>
 
       <section class="panel preview-panel">
@@ -149,6 +150,25 @@
         <canvas id="exportCanvas" width="1080" height="1680" hidden></canvas>
       </section>
     </main>
+  </div>
+
+  <div id="imageSheet" class="image-sheet" hidden>
+    <div class="image-sheet__backdrop"></div>
+    <div class="image-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="imageSheetTitle">
+      <div class="image-sheet__header">
+        <div>
+          <h2 id="imageSheetTitle">图片已生成</h2>
+          <p>手机里可长按图片保存，微信内若下载受限也能先保存这张图。</p>
+        </div>
+        <button id="closeImageSheetBtn" type="button" class="image-sheet__close" aria-label="关闭预览">关闭</button>
+      </div>
+      <div class="image-sheet__body">
+        <img id="generatedImage" class="image-sheet__img" alt="生成的资料卡图片">
+      </div>
+      <div class="image-sheet__actions">
+        <a id="openImageBtn" class="soft-button image-sheet__link" href="#" target="_blank" rel="noopener">单独打开图片</a>
+      </div>
+    </div>
   </div>
 
   <script src="./app.js"></script>

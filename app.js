@@ -57,6 +57,18 @@ const shareBtn = document.getElementById("shareBtn");
 const resetBtn = document.getElementById("resetBtn");
 const saveImageBtn = document.getElementById("saveImageBtn");
 const exportCanvas = document.getElementById("exportCanvas");
+const imageSheet = document.getElementById("imageSheet");
+const generatedImage = document.getElementById("generatedImage");
+const openImageBtn = document.getElementById("openImageBtn");
+const closeImageSheetBtn = document.getElementById("closeImageSheetBtn");
+
+function isMobileLike() {
+  return window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches;
+}
+
+function isWeChatBrowser() {
+  return /MicroMessenger/i.test(navigator.userAgent);
+}
 
 function safeParse(encoded) {
   if (!encoded) {
@@ -429,6 +441,18 @@ function dataUrlToBlob(dataUrl) {
   return new Blob([bytes], { type: mime });
 }
 
+function openImageSheet(dataUrl) {
+  generatedImage.src = dataUrl;
+  openImageBtn.href = dataUrl;
+  imageSheet.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
+function closeImageSheet() {
+  imageSheet.hidden = true;
+  document.body.style.overflow = "";
+}
+
 async function saveAsImage() {
   const data = readFormData();
   renderCanvas(data);
@@ -448,15 +472,22 @@ async function saveAsImage() {
       return;
     } catch (error) {
       if (error && error.name === "AbortError") {
-        setStatus("已生成图片，你取消了分享，可再次点击保存。");
+        openImageSheet(dataUrl);
+        setStatus("已生成图片，你取消了分享；现在可以长按预览图保存。");
         return;
       }
       console.warn("分享图片失败，改为直接下载:", error);
     }
   }
 
+  if (isMobileLike() || isWeChatBrowser()) {
+    openImageSheet(dataUrl);
+    setStatus("图片已生成。手机里请长按预览图保存，微信内若受限可点“单独打开图片”。");
+    return;
+  }
+
   downloadBlob(blob, "关于宝宝资料卡.png");
-  setStatus("图片已保存，浏览器会直接下载这张卡片。");
+  setStatus("图片已保存，浏览器会直接下载这张卡片。若没自动保存，也可再次点击查看预览图。");
 }
 
 function resetForm() {
@@ -476,6 +507,17 @@ function init() {
   shareBtn.addEventListener("click", shareProfile);
   resetBtn.addEventListener("click", resetForm);
   saveImageBtn.addEventListener("click", saveAsImage);
+  closeImageSheetBtn.addEventListener("click", closeImageSheet);
+  imageSheet.addEventListener("click", (event) => {
+    if (event.target === imageSheet || event.target.classList.contains("image-sheet__backdrop")) {
+      closeImageSheet();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !imageSheet.hidden) {
+      closeImageSheet();
+    }
+  });
 }
 
 init();

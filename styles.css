@@ -230,6 +230,13 @@ body::after {
   font-size: 14px;
 }
 
+.helper-text {
+  margin: 8px 2px 0;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .preview-wrap {
   display: flex;
   justify-content: center;
@@ -329,6 +336,95 @@ body::after {
   font-size: 14px;
 }
 
+.image-sheet[hidden] {
+  display: none;
+}
+
+.image-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.image-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(95, 72, 98, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.image-sheet__panel {
+  position: relative;
+  width: min(100% - 20px, 560px);
+  max-height: calc(100dvh - 20px);
+  margin: 10px auto;
+  padding: 16px;
+  overflow: auto;
+  border-radius: 24px;
+  background: rgba(255, 252, 254, 0.98);
+  box-shadow: 0 18px 50px rgba(95, 72, 98, 0.18);
+}
+
+.image-sheet__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.image-sheet__header h2,
+.image-sheet__header p {
+  margin: 0;
+}
+
+.image-sheet__header p {
+  margin-top: 6px;
+  color: var(--text-soft);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.image-sheet__close {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 223, 236, 0.88);
+  color: var(--pink-deep);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.image-sheet__body {
+  display: flex;
+  justify-content: center;
+}
+
+.image-sheet__img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 12px 24px rgba(255, 126, 182, 0.16);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.image-sheet__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.image-sheet__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  text-decoration: none;
+}
+
 @media (max-width: 920px) {
   .layout {
     grid-template-columns: 1fr;
@@ -373,5 +469,25 @@ body::after {
 
   .cute-card__content p {
     font-size: 15px;
+  }
+
+  .image-sheet__panel {
+    width: calc(100% - 12px);
+    max-height: calc(100dvh - 12px);
+    margin: 6px auto;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .image-sheet__header {
+    flex-direction: column;
+  }
+
+  .image-sheet__close {
+    width: 100%;
+  }
+
+  .image-sheet__img {
+    max-width: 100%;
   }
 }
